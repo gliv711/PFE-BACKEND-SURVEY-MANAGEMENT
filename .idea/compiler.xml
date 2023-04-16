@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SURVEY-MS" target="11" />
+      <module name="SURVEY-MS" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

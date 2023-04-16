@@ -11,6 +11,12 @@ import java.util.List;
 public class SurveyServiceImpl implements SurveyService {
     @Autowired
     private SurveyRepository surveyRepository;
+
+
+    @Override
+    public void SaveSurvey(Survey survey){
+        surveyRepository.save(survey);
+    }
     @Override
     public List<Survey> getAll() {
         return surveyRepository.findAll();    }
@@ -26,5 +32,11 @@ public class SurveyServiceImpl implements SurveyService {
 
     public List<Survey> getGeneral(){
         return surveyRepository.findByFieldContains("Général");
+    }
+    public List<Survey> saveAll(List<Survey> surveys) {
+        return surveyRepository.saveAll(surveys);
+    }
+    public void deleteByIdSurvey(Long id){
+    surveyRepository.deleteById(id);
     }
 }
