@@ -14,7 +14,6 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@ToString
 public class Survey {
         @Id @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id ;
