@@ -51,6 +51,11 @@ public class SurveyController {
         return new ResponseEntity<>(surveys, HttpStatus.OK);
     }
 
+    @GetMapping("/survey/count")
+    public long count(){
+        return surveyService.count();
+    }
+
     @DeleteMapping("/survey/{Id}")
     public void deleteByIduser(@PathVariable(name="Id") Long Id) {
         surveyService.deleteByIdSurvey(Id);
@@ -59,3 +64,4 @@ public class SurveyController {
 
 
 }
+

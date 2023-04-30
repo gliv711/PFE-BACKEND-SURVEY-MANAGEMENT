@@ -39,4 +39,8 @@ public class SurveyServiceImpl implements SurveyService {
     public void deleteByIdSurvey(Long id){
     surveyRepository.deleteById(id);
     }
+
+    public long count(){
+        return surveyRepository.count();
+    }
 }
