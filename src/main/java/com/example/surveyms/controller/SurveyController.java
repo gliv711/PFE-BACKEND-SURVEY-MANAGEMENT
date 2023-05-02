@@ -1,7 +1,7 @@
 package com.example.surveyms.controller;
 
 
-import com.example.surveyms.model.Survey;
+import com.example.surveyms.entity.Survey;
 import com.example.surveyms.services.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,7 +17,7 @@ import java.util.List;
 public class SurveyController {
 
     @Autowired
-    SurveyService surveyService;
+    private SurveyService surveyService;
 
 
     @PostMapping("/survey/")
@@ -33,7 +33,7 @@ public class SurveyController {
         return new ResponseEntity<>(surveys, HttpStatus.OK);
     }
 
-    @GetMapping("/survey/general")
+    /*@GetMapping("/survey/general")
     public ResponseEntity<List<Survey>> getGeneral(){
         List<Survey> surveys = surveyService.getGeneral();
         return new ResponseEntity<>(surveys, HttpStatus.OK);
@@ -50,7 +50,7 @@ public class SurveyController {
         List<Survey> surveys = surveyService.getFinances();
         return new ResponseEntity<>(surveys, HttpStatus.OK);
     }
-
+*/
     @GetMapping("/survey/count")
     public long count(){
         return surveyService.count();

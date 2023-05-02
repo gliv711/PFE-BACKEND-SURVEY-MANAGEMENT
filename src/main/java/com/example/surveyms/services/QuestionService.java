@@ -1,7 +1,7 @@
 package com.example.surveyms.services;
 
 
-import com.example.surveyms.model.Question;
+import com.example.surveyms.entity.Question;
 import java.util.List;
 
 public interface QuestionService {

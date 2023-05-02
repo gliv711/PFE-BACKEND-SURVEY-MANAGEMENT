@@ -1,17 +1,12 @@
 package com.example.surveyms.services;
 
-import com.example.surveyms.model.Survey;
+import com.example.surveyms.entity.Survey;
 
 import java.util.List;
 public interface SurveyService {
 
     List<Survey> getAll();
 
-    List<Survey> getInformatique();
-
-    List<Survey> getFinances();
-
-    List<Survey> getGeneral();
 
     List<Survey> saveAll(List<Survey> surveys);
 

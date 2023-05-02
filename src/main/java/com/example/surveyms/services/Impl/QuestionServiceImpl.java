@@ -1,11 +1,12 @@
 package com.example.surveyms.services.Impl;
 
 
-import com.example.surveyms.model.Question;
+import com.example.surveyms.entity.Question;
 import com.example.surveyms.repository.QuestionRepository;
 import com.example.surveyms.services.QuestionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
 
-    private final QuestionRepository questionRepository;
+    @Autowired
+    private QuestionRepository questionRepository;
 
     @Override
     public Question addQuestion(Question question) {
