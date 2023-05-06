@@ -1,6 +1,7 @@
 package com.ennajim.surveyms.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Answer {
     @Column(name="status")
     private Boolean status;
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "answer_question",
             joinColumns = @JoinColumn(name = "answer_id"),
