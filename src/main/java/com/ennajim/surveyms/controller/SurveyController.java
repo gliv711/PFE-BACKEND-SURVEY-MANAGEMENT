@@ -1,8 +1,12 @@
 package com.ennajim.surveyms.controller;
 
 
+import com.ennajim.surveyms.Dto.QuestionDto;
+import com.ennajim.surveyms.Dto.SurveyDto;
+import com.ennajim.surveyms.entities.Question;
 import com.ennajim.surveyms.entities.Survey;
 import com.ennajim.surveyms.services.SurveyService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value="/api")
@@ -19,18 +24,18 @@ public class SurveyController {
     @Autowired
     private SurveyService surveyService;
 
+    @Autowired
+    private ModelMapper modelMapper ;
 
-    @PostMapping("/survey/")
-    public ResponseEntity<Void> SaveSurvey(@RequestBody Survey survey) {
-        surveyService.SaveSurvey(survey);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(URI.create("/survey/" + survey.getId()));
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    @PostMapping("/survey")
+    private ResponseEntity<Survey> addSurvey(@RequestBody Survey survey) {
+        return ResponseEntity.ok(this.surveyService.addSurvey(survey));
     }
+
     @GetMapping("/survey/all")
-    public ResponseEntity<List<Survey>> getAll(){
-        List<Survey> surveys = surveyService.getAll();
-        return new ResponseEntity<>(surveys, HttpStatus.OK);
+    private List<SurveyDto> getAll(){
+        return surveyService.getAll().stream().map(survey -> modelMapper.map(survey, SurveyDto.class))
+                .collect(Collectors.toList());
     }
 
     /*@GetMapping("/survey/general")
@@ -56,8 +61,11 @@ public class SurveyController {
         return surveyService.count();
     }
 
+
+
+
     @DeleteMapping("/survey/{Id}")
-    public void deleteByIduser(@PathVariable(name="Id") Long Id) {
+    private void deleteByIduser(@PathVariable(name="Id") Long Id) {
         surveyService.deleteByIdSurvey(Id);
     }
 
