@@ -11,7 +11,7 @@ public interface SurveyService {
     List<Survey> saveAll(List<Survey> surveys);
 
     void deleteByIdSurvey(Long id);
-    void SaveSurvey(Survey survey) ;
+    Survey addSurvey(Survey survey) ;
 
     long count();
 }
