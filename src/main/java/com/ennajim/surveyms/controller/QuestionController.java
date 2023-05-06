@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class QuestionController {
-
-    private final QuestionService questionService;
+    @Autowired
+    private  QuestionService questionService;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private  ModelMapper modelMapper;
     @GetMapping("/questions/all")
     public List<QuestionDto> getAllQuestions2(){
         return questionService.getAllQuestions().stream().map(question -> modelMapper.map(question,QuestionDto.class))
