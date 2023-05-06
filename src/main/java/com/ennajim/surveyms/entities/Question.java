@@ -1,10 +1,10 @@
 package com.ennajim.surveyms.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ public class Question {
     @ManyToMany(mappedBy = "questions")
     private List<Answer> answers = new ArrayList<>();
 
-/*    @ManyToMany(mappedBy = "questions")
-    private List<Survey> surveys ;*/
+   @ManyToMany(mappedBy = "questions")
+    private List<Survey> surveys ;
 
 }
 
