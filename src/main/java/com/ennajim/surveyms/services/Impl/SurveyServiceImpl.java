@@ -14,8 +14,9 @@ public class SurveyServiceImpl implements SurveyService {
 
 
     @Override
-    public void SaveSurvey(Survey survey){
-        surveyRepository.save(survey);
+    public Survey addSurvey(Survey survey){
+
+        return this.surveyRepository.save(survey);
     }
     @Override
     public List<Survey> getAll() {
