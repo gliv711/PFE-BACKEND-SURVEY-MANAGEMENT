@@ -47,8 +47,8 @@ public class SurveyMsApplication {
 
    @Bean
     CommandLineRunner commandLineRunner (SurveyRepository surveyRepository, QuestionRepository questionRepository, AnswerRepository answerRepository){
-       Question question1 = new Question(null, "What is your name?","gen",null);
-       Question question2 = new Question(null, "What is your age?","gen",null);
+       Question question1 = new Question(null, "What is your name?","gen",null,null);
+       Question question2 = new Question(null, "What is your age?","gen",null,null);
        List<Question> list_q = new ArrayList<>();
         list_q.add(question1);
         list_q.add(question2);
