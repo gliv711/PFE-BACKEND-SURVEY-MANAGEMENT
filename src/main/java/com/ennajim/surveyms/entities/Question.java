@@ -28,6 +28,7 @@ public class Question {
     @ManyToMany(mappedBy = "questions")
     private List<Answer> answers = new ArrayList<>();
 
+    @JsonIgnore
    @ManyToMany(mappedBy = "questions")
     private List<Survey> surveys ;
 
