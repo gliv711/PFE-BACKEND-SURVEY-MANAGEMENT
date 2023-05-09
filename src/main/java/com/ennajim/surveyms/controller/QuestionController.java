@@ -3,10 +3,15 @@ package com.ennajim.surveyms.controller;
 
 import com.ennajim.surveyms.Dto.QuestionDto;
 import com.ennajim.surveyms.entities.Question;
+import com.ennajim.surveyms.entities.Survey;
+import com.ennajim.surveyms.repository.QuestionRepository;
+import com.ennajim.surveyms.repository.SurveyRepository;
 import com.ennajim.surveyms.services.QuestionService;
+import com.ennajim.surveyms.services.SurveyService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +24,11 @@ import java.util.stream.Collectors;
 public class QuestionController {
     @Autowired
     private  QuestionService questionService;
+    @Autowired
+    private QuestionRepository questionRepository ;
 
+    @Autowired
+    private SurveyRepository surveyRepository ;
     @Autowired
     private  ModelMapper modelMapper;
 //    @GetMapping("/questions/all")
@@ -49,10 +58,20 @@ public class QuestionController {
 
 
 
-    @DeleteMapping("/questions/{id}")
-    private ResponseEntity<Void> deleteQuestion(Long id) {
-        this.questionService.deleteQuestion(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/questions/{question_id}")
+    private ResponseEntity<Void> deleteQuestion(@PathVariable("question_id")Long question_id) {
+        Question question = questionRepository.findById(question_id)
+                .orElseThrow(() -> new ResourceNotFoundException("Question not found"));
+
+        // Remove the question from any surveys that it is associated with
+        for (Survey survey : question.getSurveys()) {
+            survey.getQuestions().remove(question);
+            surveyRepository.save(survey);
+        }
+
+        questionRepository.delete(question);
+
+        return ResponseEntity.ok().build();
     }
 
 
