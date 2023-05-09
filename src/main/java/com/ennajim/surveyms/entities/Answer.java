@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,13 +24,9 @@ public class Answer {
     private String answer;
     @Column(name="status")
     private Boolean status;
-    @ManyToMany
+    @ManyToMany(mappedBy = "answers",cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinTable(
-            name = "answer_question",
-            joinColumns = @JoinColumn(name = "answer_id"),
-            inverseJoinColumns = @JoinColumn(name = "question_id"))
-    private List<Question> questions = new ArrayList<>();
+    private List<Question> questions;
 
 
 
