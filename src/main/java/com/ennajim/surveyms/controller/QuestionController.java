@@ -22,20 +22,20 @@ public class QuestionController {
 
     @Autowired
     private  ModelMapper modelMapper;
-    @GetMapping("/questions/all")
-    public List<QuestionDto> getAllQuestions2(){
-        return questionService.getAllQuestions().stream().map(question -> modelMapper.map(question,QuestionDto.class))
-                .collect(Collectors.toList());
-    }
+//    @GetMapping("/questions/all")
+//    public List<QuestionDto> getAllQuestions2(){
+//        return questionService.getAllQuestions().stream().map(question -> modelMapper.map(question,QuestionDto.class))
+//                .collect(Collectors.toList());
+//    }
 
 
 
 
 
-/*    @GetMapping("/questions/all")
+   @GetMapping("/questions/all")
     private ResponseEntity<List<Question>> getAllQuestions() {
         return ResponseEntity.ok(this.questionService.getAllQuestions());
-    }*/
+    }
 
     @GetMapping("/{id}")
     private ResponseEntity<Question> getQuestion(@PathVariable Long id) {
