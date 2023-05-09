@@ -11,7 +11,7 @@ public interface QuestionService {
 
     Question updateQuestion(Question question);
 
-    void deleteQuestion(Long id);
+    void deleteQuestion(Long question_id);
 
     long count();
 }
