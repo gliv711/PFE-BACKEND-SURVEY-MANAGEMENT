@@ -22,7 +22,7 @@ public class Survey {
         private String title ;
         private String description ;
         private String field ;
-        @ManyToMany(cascade = CascadeType.ALL)
+        @ManyToMany(cascade = CascadeType.PERSIST)
         @JoinTable(
                 name = "survey_question",
                 joinColumns = @JoinColumn(name = "survey_id"),
