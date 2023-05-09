@@ -45,7 +45,7 @@ public class SurveyMsApplication {
         return new CorsFilter(urlBasedCorsConfigurationSource);
     }
 
-   @Bean
+   /*@Bean
     CommandLineRunner commandLineRunner (SurveyRepository surveyRepository, QuestionRepository questionRepository, AnswerRepository answerRepository){
        Question question1 = new Question(null, "What is your name?","gen",null,null);
        Question question2 = new Question(null, "What is your age?","gen",null,null);
@@ -65,6 +65,6 @@ public class SurveyMsApplication {
 
 
        };
-    }
+    }*/
 
 }
