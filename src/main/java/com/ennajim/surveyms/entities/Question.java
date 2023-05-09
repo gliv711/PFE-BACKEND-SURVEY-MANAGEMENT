@@ -29,7 +29,7 @@ public class Question {
             inverseJoinColumns = @JoinColumn(name = "answer_id"))
     private List<Answer> answers ;
     @JsonIgnore
-   @ManyToMany(mappedBy = "questions",cascade = CascadeType.ALL)
+   @ManyToMany(mappedBy = "questions")
     private List<Survey> surveys ;
 
 }
