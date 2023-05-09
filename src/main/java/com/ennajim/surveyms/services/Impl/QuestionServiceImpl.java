@@ -45,9 +45,18 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void deleteQuestion(Long id) {
-        log.info("Request to delete the question [{}]", id);
-        this.questionRepository.deleteById(id);
+    public void deleteQuestion(Long question_id) {
+        log.info("Request to delete the question [{}]", question_id);
+
+        if (question_id != null) {
+            this.questionRepository.deleteById(question_id);
+        }
+        else {
+            log.info("id is null");
+
+        }
+
+
     }
     public long count(){
         log.info("Request number of questions [{}]");
