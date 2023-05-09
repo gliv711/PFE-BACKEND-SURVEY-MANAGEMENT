@@ -32,6 +32,13 @@ public class SurveyController {
         return ResponseEntity.ok(this.surveyService.addSurvey(survey));
     }
 
+
+    @GetMapping("/survey/general")
+    private Survey getGeneral(){
+        return surveyService.findByField("general");
+    }
+
+
 //    @GetMapping("/survey/all")
 //    private List<SurveyDto> getAll(){
 //        return surveyService.getAll().stream().map(survey -> modelMapper.map(survey, SurveyDto.class))
