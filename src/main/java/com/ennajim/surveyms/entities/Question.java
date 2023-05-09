@@ -21,15 +21,15 @@ public class Question {
     private Long question_id;
     @Column(name = "question")
     private String question;
-
     private String field ;
-
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "question_answer",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "answer_id"))
+    private List<Answer> answers ;
     @JsonIgnore
-    @ManyToMany(mappedBy = "questions")
-    private List<Answer> answers = new ArrayList<>();
-
-    @JsonIgnore
-   @ManyToMany(mappedBy = "questions")
+   @ManyToMany(mappedBy = "questions",cascade = CascadeType.ALL)
     private List<Survey> surveys ;
 
 }
