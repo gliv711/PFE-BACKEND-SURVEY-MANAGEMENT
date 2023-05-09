@@ -23,6 +23,11 @@ public class SurveyServiceImpl implements SurveyService {
         return surveyRepository.findAll();    }
 
     @Override
+    public Survey findByField(String field) {
+        return surveyRepository.findByField("general");
+    }
+
+    @Override
 
     public List<Survey> saveAll(List<Survey> surveys) {
         return surveyRepository.saveAll(surveys);
