@@ -8,5 +8,7 @@ public interface AnswerService {
 
     Answer addAnswer(Answer answer);
     List<Answer> getAllAnswers();
-     long count();
+    long count();
+
+    void  deleteAnswer(Long answer_id);
 }
