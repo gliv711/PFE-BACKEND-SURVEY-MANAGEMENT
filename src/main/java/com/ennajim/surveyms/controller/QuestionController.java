@@ -63,7 +63,6 @@ public class QuestionController {
         Question question = questionRepository.findById(question_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Question not found"));
 
-        // Remove the question from any surveys that it is associated with
         for (Survey survey : question.getSurveys()) {
             survey.getQuestions().remove(question);
             surveyRepository.save(survey);
