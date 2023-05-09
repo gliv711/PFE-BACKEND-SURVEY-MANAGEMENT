@@ -1,14 +1,19 @@
 package com.ennajim.surveyms.controller;
 
 import com.ennajim.surveyms.entities.Answer;
+import com.ennajim.surveyms.entities.Question;
+import com.ennajim.surveyms.repository.AnswerRepository;
+import com.ennajim.surveyms.repository.QuestionRepository;
 import com.ennajim.surveyms.services.AnswerService;
 import com.ennajim.surveyms.Dto.AnswerDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -19,6 +24,12 @@ public class AnswerController {
     private ModelMapper modelMapper ;
     @Autowired
     private AnswerService answerService;
+
+    @Autowired
+    private AnswerRepository answerRepository ;
+
+    @Autowired
+    private QuestionRepository questionRepository ;
 
     @GetMapping("/answers/all")
     public List<AnswerDto> getAllAnswers(){
@@ -40,4 +51,27 @@ public class AnswerController {
         return this.answerService.count();
     }
 
-}
+
+    @DeleteMapping("/answers/{answer_id}")
+    public void deleteAnswer(@PathVariable("answer_id") Long answer_id) {
+        Optional<Answer> answer = answerRepository.findById(answer_id);
+        if (answer.isPresent()) {
+            // remove the answer from the list of answers in the associated questions
+            List<Question> questions = answer.get().getQuestions();
+            for (Question question : questions) {
+                question.getAnswers().remove(answer.get());
+                questionRepository.save(question);
+            }
+
+            // delete the answer from the question_answer table
+            answer.get().setQuestions(null);
+            answerRepository.save(answer.get());
+
+            // delete the answer from the database
+            answerRepository.delete(answer.get());
+        } else {
+            throw new ResourceNotFoundException("Answer not found");
+        }
+    }
+
+        }
