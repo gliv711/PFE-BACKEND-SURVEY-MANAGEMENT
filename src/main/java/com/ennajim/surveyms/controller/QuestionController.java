@@ -46,9 +46,9 @@ public class QuestionController {
         return ResponseEntity.ok(this.questionService.getAllQuestions());
     }
 
-    @GetMapping("/{id}")
-    private ResponseEntity<Question> getQuestion(@PathVariable Long id) {
-        return ResponseEntity.ok(this.questionService.getQuestionById(id));
+    @GetMapping("/questions/{question_id}")
+    private ResponseEntity<Question> getQuestion(@PathVariable("question_id") Long question_id) {
+        return ResponseEntity.ok(this.questionService.getQuestionById(question_id));
     }
 
     @PostMapping("/questions")
@@ -78,6 +78,8 @@ public class QuestionController {
     public long count(){
         return this.questionService.count();
     }
+
+
 
 
 }
