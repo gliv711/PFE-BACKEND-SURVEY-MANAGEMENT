@@ -43,6 +43,10 @@ public class AnswerController {
 
     @PostMapping("/answers")
     private ResponseEntity<Answer> addAnswers(@RequestBody Answer answer) {
+/*
+        Optional<Answer> answer = answerRepository.findById(answer_id);
+*/
+
         return ResponseEntity.ok(this.answerService.addAnswer(answer));
     }
 
