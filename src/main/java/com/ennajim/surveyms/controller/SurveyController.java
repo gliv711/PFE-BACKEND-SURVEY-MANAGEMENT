@@ -5,6 +5,7 @@ import com.ennajim.surveyms.Dto.QuestionDto;
 import com.ennajim.surveyms.Dto.SurveyDto;
 import com.ennajim.surveyms.entities.Question;
 import com.ennajim.surveyms.entities.Survey;
+import com.ennajim.surveyms.repository.SurveyRepository;
 import com.ennajim.surveyms.services.SurveyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class SurveyController {
     @Autowired
     private SurveyService surveyService;
 
+    @Autowired
+    private SurveyRepository surveyRepository ;
     @Autowired
     private ModelMapper modelMapper ;
 
@@ -81,7 +84,15 @@ public class SurveyController {
         surveyService.deleteByIdSurvey(Id);
     }
 
-
+    @GetMapping("/survey/{Id}/questions")
+    public List<Question> getQuestionsBySurveyId(@PathVariable(name="Id") Long Id) {
+        Survey survey = surveyRepository.findById(Id).orElse(null);
+        if (survey != null) {
+            return survey.getQuestions();
+        } else {
+            throw new IllegalArgumentException("Invalid survey ID: " + Id);
+        }
+    }
 
 }
 
