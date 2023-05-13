@@ -15,4 +15,5 @@ public interface SurveyService {
     Survey addSurvey(Survey survey) ;
 
     long count();
+
 }
