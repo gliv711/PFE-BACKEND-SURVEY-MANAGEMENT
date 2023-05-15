@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface SurveyRepository extends JpaRepository<Survey,Long> {
 
-    Survey findByField(String field);
+    List<Survey> findByfield(String field);
 
 
 }

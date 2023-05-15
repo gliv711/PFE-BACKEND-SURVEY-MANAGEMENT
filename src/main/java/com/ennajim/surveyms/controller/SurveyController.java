@@ -36,10 +36,7 @@ public class SurveyController {
     }
 
 
-    @GetMapping("/survey/general")
-    private Survey getGeneral(){
-        return surveyService.findByField("general");
-    }
+
 
 
 //    @GetMapping("/survey/all")
@@ -52,6 +49,23 @@ public class SurveyController {
     private List<Survey> getAll(){
         return surveyService.getAll();
     }
+
+    @GetMapping("/survey/general")
+    private List<Survey> getGeneral(){
+        return surveyService.findByfield("general");
+    }
+
+    @GetMapping("/survey/informatique")
+    private List<Survey> getInformatique(){
+        return surveyService.findByfield("informatique");
+    }
+
+    @GetMapping("/survey/finances")
+    private List<Survey> getFinances(){
+        return surveyService.findByfield("finances");
+    }
+
+
 
     /*@GetMapping("/survey/general")
     public ResponseEntity<List<Survey>> getGeneral(){

@@ -7,7 +7,7 @@ public interface SurveyService {
 
     List<Survey> getAll();
 
-    Survey findByField(String field);
+    List<Survey> findByfield(String field);
 
     List<Survey> saveAll(List<Survey> surveys);
 
