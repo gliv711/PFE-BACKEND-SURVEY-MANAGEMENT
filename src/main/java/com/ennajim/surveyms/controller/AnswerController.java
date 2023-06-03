@@ -78,4 +78,10 @@ public class AnswerController {
         }
     }
 
-        }
+    @GetMapping("/answers/{answer_id}")
+    public Optional<Answer> getbyId(@PathVariable("answer_id") Long answer_id) {
+        return answerService.getbyid(answer_id);
+    }
+
+
+}
