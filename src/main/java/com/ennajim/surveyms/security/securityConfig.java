@@ -33,15 +33,14 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeRequests().antMatchers("/api/login/**","/api/user/refreshtoken","/api/user","/api/user/email/{email}","/api/company","/api/admin","/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/login/**","/api/user/refreshtoken","/api/user","/api/user/email/{email}","/api/company","/api/admin").permitAll();
 
 
-        http.authorizeRequests().antMatchers(POST,"/api/answers","/api/questions","/api/survey").hasAnyAuthority("admin");
-        http.authorizeRequests().antMatchers(DELETE,"/api/answers/{answer_id}","/api/questions/{question_id}").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers(POST,"/api/answers","/api/questions","/api/survey").hasAnyAuthority("admin","adminsuper");
+        http.authorizeRequests().antMatchers(DELETE,"/api/answers/{answer_id}","/api/questions/{question_id}").hasAnyAuthority("admin","adminsuper");
 
 
-        http.authorizeRequests().antMatchers(DELETE,"/api/user/{Id}").hasAnyAuthority("superAdmin");
-        http.authorizeRequests().antMatchers(GET,"/api/questions/all","/api/answers/all","/api/answers/count","/api/questions/{question_id}","/api/questions/count","/api/survey/**").hasAnyAuthority("admin");
+        http.authorizeRequests().antMatchers(GET,"/api/questions/all","/api/answers/all","/api/answers/count","/api/questions/{question_id}","/api/questions/count","/api/survey/**").hasAnyAuthority("admin","adminsuper");
 
 
         http.authorizeRequests().anyRequest().authenticated();
